@@ -1,0 +1,1 @@
+Toda la implementacion de spring security y jwt fue extraida de https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication y adaptada para este proyecto
