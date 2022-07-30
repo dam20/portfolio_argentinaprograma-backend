@@ -49,34 +49,27 @@ public class Controller {
 
     @GetMapping("/person/{id}")
     @ResponseBody
-    //public User buscaPersons(@PathVariable Long id) {
-    //    return userService.findUser(id);
     public Person buscaPersona (@PathVariable Long id) {
         return persService.findPerson(id);
     }
 
-    @PostMapping("/new/persona")
-    public void agregarPersona(@RequestBody Person pers) {
-        persService.savePerson(pers);
-    }
-
-    @PostMapping("/person/edit/header/{id}")
-    public void editarPersona(@PathVariable Long id, @RequestBody Person profile) {
+    @PostMapping("/person/edit/{id}")
+    public void editarPersona(@PathVariable Long id, @RequestBody Person newPerson) {
         Person per = persService.findPerson(id);
-        per.setName(profile.getName());
-        per.setBirthDate(profile.getBirthDate());
-        per.setNationality(profile.getNationality());
-        per.setLocation(profile.getLocation());
-        // completar para la imagen y foto de perfil
-        //per.setProfile();
-        //persService.editPersonProfile(id, profile);
+        per.setName(newPerson.getName());
+        per.setBirthDate(newPerson.getBirthDate());
+        per.setNationality(newPerson.getNationality());
+        per.setLocation(newPerson.getLocation());
+        per.getProfile().setBackground(newPerson.getProfile().getBackground());
+        per.getProfile().setProfilePicture(newPerson.getProfile().getProfilePicture());
+
         persService.savePerson(per);
     }
     
-        @DeleteMapping("/delete/{id}")
-    public void deletePersona(@PathVariable Long id) {
-        persService.deletePerson(id);
-    }
+//        @DeleteMapping("/delete/{id}")
+//    public void deletePersona(@PathVariable Long id) {
+//        persService.deletePerson(id);
+//    }
     
     @PostMapping("/person/edit/aboutme/{id}")
     public void editarPersonaAcercaDe(@PathVariable Long id, @RequestBody String aboutMe) {
@@ -137,13 +130,6 @@ public class Controller {
     public void deleteProyecto(@PathVariable Long id, @RequestBody Project project) {
 
         persService.deleteProject(id, project);
-    }
-///////////////////////hasta aqui llegue///////////////////////////////////////////
-
-    @GetMapping("/ver/{id}/estudios")
-    @ResponseBody
-    public List<Education> listaEstudiosPersonas(@PathVariable Long id) {
-        return persService.showPersonEducation(id);
-    }
+    }   
 
 }

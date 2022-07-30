@@ -4,6 +4,7 @@
  */
 package ml.dmoyano.argentinaprograma.Portfolio.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,12 +24,21 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
+    @Column(length = 1000)
+    private String description;
+    private String state;
+    private String link;
+    private String image;
 
     public Project() {
     }
 
-    public Project(int id, String name) {
+    public Project(int id, String name, String description, String state, String link, String image) {
         this.id = id;
         this.name = name;
+        this.description = description;
+        this.state = state;
+        this.link = link;
+        this.image = image;
     }
 }
